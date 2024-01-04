@@ -1,0 +1,275 @@
+:root{
+	--font01: Pathway Extreme, sans-serif;
+	--font02: Montserrat, sans-serif;
+}
+
+body {
+  font-family: var(--font01);
+  color:white;
+  background: #1A1C2B;
+  position:relative;
+  -webkit-tap-highlight-color: transparent
+}
+body.gerou{
+	overflow:hidden;
+}
+
+body h1{
+	text-align:center;
+	width:100%;
+	font-weight:900;
+	font-family: var(--font02)
+}
+body h1::after{
+	content:"Preencha corretamente";
+	font-family: var(--font01);
+	display:block;
+	opacity:0.4;
+	font-size:0.6em;
+}
+.t{
+	color:orange;
+	font-weight:800;
+	margin-top:30px;
+	margin-bottom:10px;
+	margin-left:10px;
+	font-family: var(--font02);
+	display:flex;
+	width:100%;
+	
+}
+form {
+  padding: 20px;
+  background: transparent;
+}
+
+
+form label {
+  display: flex;
+  background: rgba(37, 39, 54,0.4);
+  color: rgba(255,255,255,0.4);
+  border-radius:20px 20px 0 0;
+  padding:10px 20px;
+  position:relative;
+}
+#site{
+  padding:0;
+  background:none;
+  border:none;
+  margin-left:auto;
+  text-align:right;
+  border-radius:0;
+  opacity:0.6;
+  
+}
+form span{
+  position: relative;
+}
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 0 0 20px 20px;
+  border: none;
+  color: white;
+  outline: none;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  background: #252736;
+}
+.check,
+form #poster{
+  color: rgba(255,255,255,0.8);
+}
+
+.qualidade{
+  display:grid;
+  gap:10px;
+  grid-template-columns: 1fr 1fr;
+}
+.displaynone{
+  display:none;
+}
+
+.qualidade input,
+  .qualidade label{
+    border-radius:10px;
+    margin-bottom:10px;
+  }
+form button{
+  background: linear-gradient(to right, #4027C2, #6A32F6);
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:3;
+  transition: display 0.3s ease;
+}
+body.gerou .button{
+	display:none;
+}
+body.off .button{
+  pointer-events:none;
+  opacity:0.6;
+  
+}
+
+form button:active{
+	transform: scale(1.2);
+}
+
+#alert{
+	position:fixed;
+	bottom:50px;
+	width:100%;
+	display:none;
+	justify-content:center;
+	pointer-events:none;
+	z-index:10;
+}
+body.gerou #alert{
+	display:flex;
+}
+#alert h2{
+	font-size:0.8em;
+	width:auto;display:flex;
+	align-items:center;
+	background: #4D4F5B;
+	padding:10px 30px;
+	border-radius:5px;
+	margin:0 auto;
+}
+#alert h2::before{
+	content: "Clique para copiar o código";
+}
+
+#alert h2::after{
+	content:"\e86c";
+	margin-left:10px;
+	font-size:2em;
+	font-family: material symbols outlined;
+}
+
+.code{
+	top:0%;
+	right:0%;
+	width:100%;
+	height:100%;
+	z-index:2;
+	background:rgba(28, 30, 45,0.8);
+	display:none;
+	align-items:center;
+	justify-content:center;
+	position: fixed;
+}
+
+body.gerou .code{
+	display:flex;
+}
+
+#generatedCode {
+ width:80%;
+ height:80%;
+ overflow:auto;
+ white-space: pre;
+ background:#252736;
+ border-radius:10px;
+ border:2px solid orange;
+}
+
+#resultadoIframe{
+  width:40%;
+  max-height:80px;
+  background:#252736;
+  display:inline-flex;
+  overflow: hidden;
+  border-radius:10px;
+  
+}
+#resultadoIframe iframe{
+  width:100%;
+  height:100%;
+}
+
+#codigoIframe{
+  display:none;
+  
+  
+}
+
+.capa{
+height:auto;
+width:100%;
+margin-bottom:10px
+}
+
+form label div{
+  margin-left:auto;
+  padding:0;
+}
+
+.logoCop{
+  width:auto;
+  height:20px;
+  object-fit:cover
+}
+#pageAnime{
+  margin:0;
+}
+ #mensagemErro{
+   color:red;
+   font-size:0.8em;
+   
+ }
+ 
+ 
+.checkbox-adm{
+  display: flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+  background: #252736;
+  border-radius:0 0 10px 10px;
+}
+
+.checkbox-adm{
+  gap:0;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content:space-between;
+  text-align:left!important;
+  padding:10px;
+  box-sizing:border-box;
+}
+.checkbox-adm label{
+  width:100%;
+  margin:0;
+  height:auto;
+  padding:3px 0px;
+  font-size:0.8em;
+  display:flex;
+  justify-content:left;
+  border-radius:unset;
+}
+
+.checkbox-adm input[type="radio"]{
+  margin:auto 10px auto 0!important;
+  display:flex;
+  height:10px;
+  width:10px;
+}
+
+.mingif{
+  max-width:80px;
+  min-height:55px;
+  position:absolute;
+  right:10px;
+  top:10px;
+  border-radius:10px;
+  object-fit:cover
+}

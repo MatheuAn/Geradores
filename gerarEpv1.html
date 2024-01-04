@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerar Anime</title>
+    <link rel="stylesheet" href="/Páginas blogger/geradores/Gerar Episódio/gerarEp.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800;900&family=Pathway+Extreme&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body onload="atualizarDataId()">
+  <h1>GERAR EPISÓDIO</h1>
+
+
+  <form action="#" method="post">
+    <!-- Your form questions go here... -->
+    <div class="t">Site
+    <input type="text" value="https://www.yuunimes.top/" id="site" oninput="atualizarDataId()" onchange="substituirLink()" readonly></div>
+    <img class="capa" id="capaImagem" src=""/>
+    <label>Capa/Poster do episódio:</label>
+    <input type="text" value="http://tinyurl.com/bannerep-png" id="poster" onchange="substituirLink()" readonly><br>
+    <label>Logo do site:
+    <div><img class="logoCop" src=""/></div>
+    </label>
+    <input type="text" id="logo" class="check" value="http://tinyurl.com/logoSite-png" onchange="substituirLink()" readonly><br>
+    
+    <span>
+    <label>Link Gif</label>
+    <input id="logoimg" onchange="substituirLink()" type="text">
+    <img class="mingif"src=""/>
+    </span>
+    
+    <label>Página do anime</label>
+    <input id="pageAnime" onchange="substituirLink()" oninput="validarPageAnime()" type="text">
+    <span id="mensagemErro"></span><br><br>
+    
+    <label>Lista de episódios</label>
+    <input id="pageList" oninput="atualizarListep()" onchange="substituirLink()" type="text">
+    <span class="displaynone">
+    <label>Lista de episódios</label>
+    <input id="listep" onchange="substituirLink()" type="text">
+    </span>
+    
+
+    
+    
+    <div class="qualidade">
+    <label>Link 480p</label>
+    <input id="qualidade1" oninput="atualizardownload1()" onchange="substituirLink()" type="text">
+    
+    <label>Link 720p</label>
+    <input id="qualidade2" oninput="atualizardownload2()" onchange="substituirLink()" type="text">
+    
+    <label>Link 1080p</label>
+    <input id="qualidade3" oninput="atualizardownload3()" onchange="substituirLink()" type="text">
+    
+    <span class="displaynone">
+    <label> 480p</label>
+    <input id="download1" onchange="substituirLink()" type="text" readonly>
+    
+    <label> 720p</label>
+    <input id="download2" onchange="substituirLink()" type="text" readonly>
+    
+    <label> 1080p</label>
+    <input id="download3" onchange="substituirLink()" type="text" readonly>
+   </span>
+   </div><br>
+    <label>Episódio Anterior</label>
+    <input id="anteriorep" onchange="substituirLink()" type="text">
+    
+    <label>Próximo Episódio</label>
+    <input id="proximoep" onchange="substituirLink()" type="text">
+    
+    
+<div class="t">INFORMAÇÕES</div>
+    <label>Titulo Episódio:</label>
+    <input id="title" onchange="substituirLink()" oninput="atualizarDataId()" placeholder="Ex: Eu sou Luffy! - O Homem que vai ser o Rei dos Piratas!" type="text"><br>
+    
+    <label>Episódio</label>
+    <input id="numero" onchange="substituirLink()" oninput="atualizarDataId()" placeholder="Ex: 01" type="number"><br>
+    
+    <label>Data do episódio</label>
+    <input id="data" onchange="substituirLink()" oninput="atualizarDataId()" placeholder="Ex: 03 Janeiro 2024" type="text"><br>
+    
+    <label>Id unico do ep:</label>
+    <input class="check" id="dataid" oninput="atualizarDataId()" oninput="atualizarDataId()" type="text" readonly><br>
+    <input class="displaynone" id="admfoto" type="text" onchange="substituirLink()" readonly>
+   
+    <label>Upload por:</label>
+    <div class="checkbox-adm">
+      <label><input data-id="https://i.ibb.co/rxP1Pqs/IMG-20231230-WA0348.jpg" type="radio" name="adm"> YuuNimes</label>
+      <label><input data-id="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTdu5ajUSrQJ6Gz_vFkHoP7XC7-tXvCboF8w&usqp=CAU" type="radio" name="adm"> mStaille</label>
+      <label><input data-id="https://i.ibb.co/RNsz1Wn/IMG-20231230-WA0684.jpg" type="radio" name="adm"> BLOOM</label>
+      <label><input data-id="https://i.ibb.co/1RWsCKH/IMG-20231230-WA0408.jpg" type="radio" name="adm"> Gwinsy</label>
+    </div>
+    </span><br>
+
+    
+    
+    
+    <button class="button" type="button" onclick="generateHTML()">Gerar código</button>
+       </form>
+       <div id="alert">
+         <h2></h2>
+       </div>
+   
+       <div class="code" onclick="removegerou()">
+         <div id="generatedCode" onclick="copyToClipboard('generatedCode')">
+         </div>
+      </div>
+       
+       
+  <script>
+  // img poster 
+var capaImg = document.querySelector(".capa");
+  capaImg.src = poster.value;
+  
+var logoCop = document.querySelector(".logoCop");
+var check = document.querySelector(".check");
+  logoCop.src = check.value;
+  
+  
+  
+  // Gerar código 
+  function generateHTML() {
+    var codeElement = document.querySelector('.code');
+    var bodyElement = document.body;
+  
+    codeElement.classList.add('gerou');
+    bodyElement.classList.add('gerou');
+  }
+  
+  function removegerou() {
+    var codeElement = document.querySelector('.code');
+    var bodyElement = document.body;
+  
+    codeElement.classList.remove('gerou');
+    bodyElement.classList.remove('gerou');
+  }
+  
+  
+  // copiar 
+  function copyToClipboard(elementId) {
+    var element = document.getElementById(elementId);
+    var range = document.createRange();
+    range.selectNode(element);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();
+    alert("Texto copiado!");
+  }
+  
+
+
+
+//ADM
+var upload = '';
+var admfotoCampo = document.getElementById("admfoto");
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Recupera o valor do localStorage
+  var storedUpload = localStorage.getItem('selectedUpload');
+  if (storedUpload) {
+    upload = storedUpload;
+
+    // Marca o input correspondente
+    document.querySelectorAll('input[name="adm"]').forEach((radio) => {
+      if (radio.parentNode.textContent.trim() === upload) {
+        radio.checked = true;
+        admfotoCampo.value = radio.getAttribute("data-id");
+      }
+    });
+  }
+
+  // Adiciona eventos de mudança aos inputs
+  document.querySelectorAll('input[name="adm"]').forEach((radio) => {
+    radio.addEventListener('change', function() {
+      if (this.checked) {
+        upload = this.parentNode.textContent.trim();
+
+        // Atualiza o valor de admfoto
+        admfotoCampo.value = this.getAttribute("data-id");
+
+        // Armazena o valor no localStorage
+        localStorage.setItem('selectedUpload', upload);
+      } else {
+        upload = '';
+        admfotoCampo.value = ''; // Limpa o valor de admfoto
+      }
+
+      substituirLink();
+    });
+  });
+});
+
+  
+  
+function validarPageAnime() {
+  var pageAnimeCampo = document.getElementById("pageAnime");
+  var mensagemErro = document.getElementById("mensagemErro");
+  var body = document.body;
+  var valorPageAnime = pageAnimeCampo.value;
+
+  // Verificar se o valor termina com ".html"
+  if (valorPageAnime.length > 0 && !valorPageAnime.endsWith(".html")) {
+    mensagemErro.textContent = "O valor deve terminar com '.html'";
+    body.classList.add("off");
+  } else {
+    mensagemErro.textContent = ""; // Limpar a mensagem se estiver correta
+    body.classList.remove("off");
+  }
+}
+
+
+function atualizarDataId() {
+  var dataidCampo = document.getElementById("dataid");
+  var titleCampo = document.getElementById("title");
+  var numeroCampo = document.getElementById("numero");
+  var dataCampo = document.getElementById("data");
+  var siteCampo = document.getElementById("site");
+
+  // Remover espaços dos valores dos campos
+  var siteValue = siteCampo.value.replace(/\s/g, '');
+  var titleValue = titleCampo.value.replace(/\s/g, '');
+  var numeroValue = numeroCampo.value.replace(/\s/g, '');
+  var dataValue = dataCampo.value.replace(/\s/g, '');
+
+  // Criar o valor do data-id sem espaços
+  var dataidValue = siteValue + titleValue + numeroValue + dataValue;
+
+  // Atribuir o valor ao campo data-id
+  dataidCampo.value = dataidValue;
+}
+
+
+ 
+  function atualizarListep() {
+  var pageList= document.getElementById("pageList");
+  var listep = document.getElementById("listep");
+
+  // Atribuir o valor de pageList a listep
+  listep.value = pageList.value;
+
+  // O restante do seu código...
+  substituirLink();
+}
+
+
+  function atualizardownload1() {
+  var qualidade1= document.getElementById("qualidade1");
+  var download1 = document.getElementById("download1");
+  download1.value = qualidade1.value;
+  substituirLink();
+}
+  function atualizardownload2() {
+    var qualidade2 = document.getElementById("qualidade2");
+    var download2 = document.getElementById("download2");
+    download2.value = qualidade2.value;
+    substituirLink();
+  }
+    function atualizardownload3() {
+      var qualidade3 = document.getElementById("qualidade3");
+      var download3 = document.getElementById("download3");
+      download3.value = qualidade3.value;
+      substituirLink();
+    }
+
+document.addEventListener('DOMContentLoaded', function() {
+  var logoimgCampo = document.getElementById("logoimg");
+  var mingifImg = document.querySelector(".mingif");
+
+  // Adiciona um ouvinte para atualizar a imagem quando o valor do input mudar
+  logoimgCampo.addEventListener('input', function() {
+    var newSrc = logoimgCampo.value;
+
+    // Atualiza o src da imagem
+    mingifImg.src = newSrc;
+  });
+});
+
+
+  function substituirLink() {
+  var generatedCode = document.getElementById("generatedCode");
+  var poster = document.getElementById("poster");
+  var logo = document.getElementById("logo");
+  var pageAnime = document.getElementById("pageAnime");
+  var pageList = document.getElementById("pageList");
+  var qualidade1 = document.getElementById("qualidade1");
+  var qualidade2 = document.getElementById("qualidade2");
+  var qualidade3 = document.getElementById("qualidade3");
+  var numero = document.getElementById("numero");
+  var title = document.getElementById("title");
+  var data = document.getElementById("data");
+  var anteriorep = document.getElementById("anteriorep");
+  var proximoep = document.getElementById("proximoep");
+  var listep = document.getElementById("listep");
+  var download1 = document.getElementById("download1");
+  var download2 = document.getElementById("download2");
+  var download3 = document.getElementById("download3");
+  var admfoto = document.getElementById("admfoto");
+  var logoimg = document.getElementById("logoimg")
+  
+  
+  var logoimg = logoimg.value;
+  var admfoto = admfoto.value;
+  var download3 = download3.value;
+  var download2 = download2.value;
+  var download1 = download1.value;
+  var listep = listep.value;
+  var proximoep = proximoep.value;
+  var anteriorep = anteriorep.value;
+  var data = data.value;
+  var title = title.value;
+  var numero = numero.value;
+  var qualidade1 = qualidade1.value;
+  var qualidade2 = qualidade2.value;
+  var qualidade3 = qualidade3.value;
+  var pageList = pageList.value;
+  var pageAnime = pageAnime.value;
+  var logo = logo.value;
+  var poster = poster.value;
+  var codigoHTML =
+  `<section class="geralvideopc">
+     <section class="secvideo video-container custom-video-player">
+  <video id="myVideo"  poster="${poster}">
+      <source id="videoSource" src="" preload="auto">
+  </video>
+  <div class="bannerads">
+    <button id="closeButton" onclick="closeBanner()" disabled><div id="countdownpp">5</div></button>
+    <div id="contbanner"></div>
+  </div>
+  <span class="poster">
+    <img src="${logoimg}"/>
+  </span>
+  <div id="controlsplayer">
+    <span class="superiorpart"> 
+      <span>
+         <img src="${logo}"/>
+       </span>
+         <button class="buttonjmp" id="eplinkpro">Próx. Ep</button>
+         <button class="buttonjmp" id="pularop">Pular 90s</button>
+    </span>
+    <span class="medialpart">
+      <button id="minusseg"></button>
+  <button id="customPlayPauseBtn"></button>
+      <button id="moreseg"></button>
+    </span>
+    <span class="endpart">
+        <div class="timeline">
+  <input class="progressao" type="range" min="0" max="100" value="0" step="0.01">
+          </div>
+          <div class="morebtn">
+      <button id="volumepp">
+        <input class="volu" type="range" min="0" max="100" value="100">
+      </button>
+      <button class="velocidade speed-btn">1x</button>
+      <span class="current-time">00:00</span>
+      <span class="total-time"></span>
+      <button id="qualidade"><h8 id="qAtual"></h8></button>
+  <h3 id="video480p" data-source="${qualidade1}" onclick="changeSource(this)">480p</h3><img>
+  <h3 id="video720p" class="hd" data-source="${qualidade2}" onclick="changeSource(this)">720p</h3>
+  <h3 id="video1080p" data-source="${qualidade3}" onclick="changeSource(this)">1080p</h3>
+      <button id="fullcontrols" class="full-screen-btn"></button>
+      </div>
+    </span>
+  </div>
+  </section>
+      <div class="iframeep">
+        <iframe src="${listep}" frameborder="0" onload="resizeIframe(this)"></iframe>
+      </div>
+    </section>
+  <section class="sectionpage" id="pageplayer">
+    <div id="player"></div>
+    <main>
+    <span class="titlepp">
+      <h4>Episódio ${numero}</h4>
+      <h2>${title}</h2>
+      <div>
+        <h5>HD</h5>
+        <h5>LEG</h5>
+        <h5>${data}</h5>
+      </div>
+    </span>
+    <div class="geralpc">
+  <span data-id="${dataid.value}" class="likepp">
+    <button id="likepp" onclick="toggleActive(this)"></button>
+    <button id="deslikepp" onclick="toggleActive(this)"></button>
+    <div class="nextprevpp">
+      <a href="${anteriorep}"></a>
+      <a href="${pageAnime}"></a>
+      <a class="proxeplink" href="${proximoep}"></a>
+    </div>
+  </span>
+  <div class="infos">
+    <img src="${admfoto}"/>
+    <span>
+        <h1>${upload}</h1>
+        <h4>Administrador</h4>
+    </span>
+  </div>
+  <h2 class="download" onclick="toggledowbpp(this)">Download</h2>
+   </div>
+     <div id="downloadpp">
+       <a href="${download1}" class="statusText">480p</a>
+       <a href="${download2}" class="statusText">720p</a>
+       <a href="${download3}" class="statusText">1080p</a>
+     </div>
+    </main>
+      <div id="iframeep">
+        <iframe src="${pageList}" frameborder="0"onload="resizeIframe(this)"></iframe>
+      </div>
+    <div class="error">
+      <h1>Atenção!</h1>
+      <h4>Em caso de algum erro, atualize a página </h4>
+    </div>
+  </section>
+    `;
+
+  generatedCode.textContent = codigoHTML;
+
+}
+
+  
+
+  </script>
+
+</body>
+</html>
