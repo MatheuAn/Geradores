@@ -290,7 +290,7 @@ function substituirLink() {
   
   var codigoHTML = `
   <section>
-    <div id="fundopa" style="background-image: url('${capamobile}');">
+    <div id="fundopa" class="imgP"  style="background-image: url('${capamobile}');">
     </div>
     <div class="divcapamore">
       <span id="capa">
