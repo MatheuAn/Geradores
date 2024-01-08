@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerar Anime</title>
-    <link rel="stylesheet" href="https://matheuan.github.io/Geradores/gerarAnime.css">
+    <link rel="stylesheet" href="/Páginas blogger/geradores/Gerar anime/formulário.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800;900&family=Pathway+Extreme&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -34,19 +34,20 @@
     
 
 
-    <label class="lab1 lab1-5">Link da Temporada anterior:</label>
-    <input type="text" id="linkAnterior" onchange="substituirLink()"><br>
 
-    <label class="lab1 lab1-6">Link da Próxima Temporada:</label>
-    <input type="text" id="linkProximo" onchange="substituirLink()"><br>
-    
     
 <div class="t">INFORMAÇÕES</div>
+    <label>Título:</label>
+    <input type="text" class="title" oninput="titulolinks()"><br>
+    
     <label>Título secundário:</label>
     <input type="text" class="subtitle" onchange="substituirLink()"><br>
+    
+    <label>Temporada atual:</label>
+    <input placeholder="Ex: 1ª Temporada" type="number" id="temporadaAtual" onchange="substituirLink()" oninput="titulolinks()"><br>
 
     <label>Sinopse:</label>
-    <textarea id="sinopse" rows="4" cols="50" onchange="substituirLink()"></textarea><br>
+    <textarea id="sinopse" rows="4" cols="50" onchange="substituirLink()" oninput="substituirQuebrasDeLinha()"></textarea><br>
 
     <label>Nota:</label>
     <input placeholder="Se não possuir Nota add '0'" type="number" id="nota" onchange="substituirLink()"><br>
@@ -59,12 +60,6 @@
       <label><input name="estacao" type="radio"> Outono</label>
       <label><input name="estacao" type="radio"> Verão</label>
     </div><br>
-
-    <label>Temporada atual:</label>
-    <input placeholder="Ex: 1ª Temporada" type="number" id="temporadaAtual" onchange="substituirLink()"><br>
-
-
-
 
 <div class="t">DETALHES</div>
 <div class="dels">
@@ -164,11 +159,11 @@
   <label><input type="checkbox"> Samurai</label>
   <label><input type="checkbox"> Sci-fi</label>
   <label><input type="checkbox"> Slice of Life</label>
-  <label><input type="checkbox"> Sobrenatural</label>
+  <label><input type="checkbox"> Viagem no tempo</label>
   <label><input type="checkbox"> Shonen</label>
   <label><input type="checkbox"> Shoujo</label>
   
-  <label><input type="checkbox"> Viagem no tempo</label>
+  <label><input type="checkbox"> Sobrenatural</label>
   <label><input type="checkbox"> Super Poderes</label>
   <label><input type="checkbox"> Suspense</label>
   <label><input type="checkbox"> Terror</label>
@@ -186,6 +181,16 @@
       <label><input type="radio" name="adm"> Gwinsy</label>
     </div>
     </span><br>
+    <label class="lab1">Link da Temporada anterior:</label>
+    <input type="text" class="check" id="linkAnterior" onchange="substituirLink()"><br>
+
+    <label class="lab1">Link da Próxima Temporada:</label>
+    <input type="text" class="check" id="linkProximo" onchange="substituirLink()"><br>
+    
+    <label class="lab1">Link dessa temporada:</label>
+    <input type="text" class="check" id="linkAtual"><br>
+    
+    
     
     <button class="button" type="button" onclick="generateHTML()">Gerar código</button>
   </form>
@@ -200,7 +205,45 @@
 
 
 <script>
+// gerar links
+function titulolinks() {
+  // Obter o valor do input title
+  var titleValue = document.querySelector('.title').value;
+
+  // Substituir espaços por "-" e converter para minúsculas
+  titleValue = titleValue.replace(/\s+/g, "-").toLowerCase();
+
+  // Obter o valor do input temporadaAtual
+  var temporadaAtualValue = document.getElementById("temporadaAtual").value;
+
+  // Construir o link da temporada anterior com a subtração de 1
+  var linkAnteriorValue = 'https://yuunimes.top/' + titleValue + '-' + (temporadaAtualValue - 1);
+
+  // Construir o link da próxima temporada com a adição de 1
+  var linkProximoValue = 'https://yuunimes.top/' + titleValue + '-' + (parseInt(temporadaAtualValue) + 1);
+
+  // Construir o link da temporada atual (sem alteração no valor de temporadaAtualValue)
+  var linkAtualValue = titleValue + '-' + temporadaAtualValue;
+
+  // Atualizar os valores dos inputs linkAnterior, linkProximo e linkAtual
+  document.getElementById("linkAnterior").value = linkAnteriorValue;
+  document.getElementById("linkProximo").value = linkProximoValue;
+  document.getElementById("linkAtual").value = linkAtualValue;
+}
+
+
+
+// sinopse
+  function substituirQuebrasDeLinha() {
+    // Obter o valor do textarea
+    var sinopse = document.getElementById("sinopse").value;
   
+    // Substituir quebras de linha por "<br><br>"
+    var sinopseFormatada = sinopse.replace(/\n/g, "<br><br>");
+  
+    // Atualizar o valor do textarea
+    document.getElementById("sinopse").value = sinopseFormatada;
+  }
 
 
 // ordem alfabetica 
@@ -491,7 +534,7 @@ function substituirLink() {
   var htmlGeradoText = htmlGeradoText.value;
   
   var codigoHTML = `
-  <section>
+<section>
     <div id="fundopa" class="imgP" style="background-image: url('${capamobile}');">
     </div>
     <div class="divcapamore">
