@@ -492,7 +492,7 @@ function substituirLink() {
   
   var codigoHTML = `
   <section>
-    <div id="fundopa" style="background-image: url('${capamobile}');">
+    <div id="fundopa" class="imgP" style="background-image: url('${capamobile}');">
     </div>
     <div class="divcapamore">
       <span id="capa">
@@ -544,10 +544,8 @@ function substituirLink() {
           <li onclick="atsection(this,'cast')">Cast</li>
         </ul>
       </main>
-  
       <section id="episodios" class="content attsection">
         <iframe src="${listaeps}" frameborder="0" class="resizeable-iframe"></iframe>
-  
       </section>
       <section id="ficha" class="content">
         <ul>
@@ -617,9 +615,6 @@ function substituirLink() {
         <ul>
         </ul>
       </section>
-  
- 
-  
   `;
 
 var capaInput = document.getElementById('Capa');
