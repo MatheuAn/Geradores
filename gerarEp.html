@@ -8,242 +8,155 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800;900&family=Pathway+Extreme&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body>
-  <h1>GERAR ANIME</h1>
+<body onload="atualizarDataId()">
+  <h1>GERAR EPISÓDIO</h1>
+
+
   <form action="#" method="post">
     <!-- Your form questions go here... -->
-    <div class="t">LINKS</div>
-    <label class="lab1 lab1-1">Sua lista de episódios :<a class="a" href="#"></a></label>
-    <input type="text" id="listaeps" onchange="substituirLink()"><br>
-    
-    <div class="opT">
-    <span>
-    <label class="lab1 lab1-2">Opening/ trailer:<a class="a"></a></label>
-    <input type="text" id="youtubeLink" onchange="substituirLink()" oninput="gerarEmbed()">
-    </span>
-            <div id="resultadoIframe"></div>
+    <div class="t">Site
+    <input type="text" value="https://www.yuunimes.top/" id="site" oninput="atualizarDataId()" onchange="substituirLink()" readonly>
     </div>
+    
+    <img class="capa" id="capaImagem" src=""/>
+    
+    <label>Capa/Poster do episódio:</label>
+    <input type="text" value="http://tinyurl.com/bannerep-png" id="poster" onchange="substituirLink()" readonly><br>
+    <label>Logo do site:
+    <div><img class="logoCop" src=""/></div>
+    </label>
+    <input type="text" id="logo" class="check" value="http://tinyurl.com/logoSite-png" onchange="substituirLink()" readonly><br>
+    
+    <span>
+    <label>Link Gif/Img do ep</label>
+    <input id="logoimg" onchange="substituirLink()" type="text">
+    <img class="mingif" src=""/>
+    </span>
+   
+    <label>Lista de episódios</label>
+    <input id="pageList" oninput="atualizarListep()" onchange="substituirLink()" type="text">
+    <span class="displaynone">
+    <label>Lista de episódios</label>
+    <input id="listep" onchange="substituirLink()" type="text">
+    </span>
+    
 
-    <label class="lab1 lab1-3">Capa do anime:<a class="a"></a>
-    <img src=""/></label>
-    <input type="text" id="Capa" oninput="substituirLink()" onchange="substituirLink()"><br>
-
-    <label class="lab1 lab1-4">Capa do anime (mobile):<a class="a"></a></label>
-    <input type="text" id="Capamobile" onchange="substituirLink()"><br>
+    
+    
+    <div class="qualidade">
+    <label>Link 480p</label>
+    <input id="qualidade1" oninput="atualizardownload1()" onchange="substituirLink()" type="text">
+    
+    <label>Link 720p</label>
+    <input id="qualidade2" oninput="atualizardownload2()" onchange="substituirLink()" type="text">
+    
+    <label>Link 1080p</label>
+    <input id="qualidade3" oninput="atualizardownload3()" onchange="substituirLink()" type="text">
+    
+    <span class="displaynone">
+    <label> 480p</label>
+    <input id="download1" onchange="substituirLink()" type="text" readonly>
+    
+    <label> 720p</label>
+    <input id="download2" onchange="substituirLink()" type="text" readonly>
+    
+    <label> 1080p</label>
+    <input id="download3" onchange="substituirLink()" type="text" readonly>
+   </span>
+   </div><br>
     
     
 
 
-    <label class="lab1 lab1-5">Link da Temporada anterior:</label>
-    <input type="text" id="linkAnterior" onchange="substituirLink()"><br>
-
-    <label class="lab1 lab1-6">Link da Próxima Temporada:</label>
-    <input type="text" id="linkProximo" onchange="substituirLink()"><br>
-    
-    
 <div class="t">INFORMAÇÕES</div>
-    <label>Título secundário:</label>
-    <input type="text" class="subtitle" onchange="substituirLink()"><br>
-
-    <label>Sinopse:</label>
-    <textarea id="sinopse" rows="4" cols="50" onchange="substituirLink()"></textarea><br>
-
-    <label>Nota:</label>
-    <input placeholder="Se não possuir Nota add '0'" type="number" id="nota" onchange="substituirLink()"><br>
-    
-    
-    <label>Estação:</label>
-    <div class="checkbox-list">
-      <label><input name="estacao" type="radio"> Inverno</label>
-      <label><input name="estacao"type="radio"> Primavera</label>
-      <label><input name="estacao" type="radio"> Outono</label>
-      <label><input name="estacao" type="radio"> Verão</label>
-    </div><br>
-
-    <label>Temporada atual:</label>
-    <input placeholder="Ex: 1ª Temporada" type="number" id="temporadaAtual" onchange="substituirLink()"><br>
-
-
-
-
-<div class="t">DETALHES</div>
-<div class="dels">
-	<span>
-    <label>Eps Totais:</label>
-    <input placeholder="00" type="number" id="totaleps" onchange="substituirLink()"><br>
-    </span>
-    <span>
-    	<label>Ano:</label>
-    	<input placeholder="2024" type="number" class="ano" onchange="substituirLink()"><br>
-    </span>
-    <span>
-    <label>Duração:</label>
-    <input placeholder="24 min" type="number" id="duration" onchange="substituirLink()"><br>
-    </span>
-    <span>
-    <label>Estúdio:</label>
-    <input type="text" id="estudio" onchange="substituirLink()"><br>
-    </span>
-    <span>
-    <label>País:</label>
-    <input type="text" id="pais" onchange="substituirLink()"><br>
-    </span>
-    <span>
-    <label>OVAs:</label>
-    <input placeholder="00"  type="number" id="ova" onchange="substituirLink()">
-    <br>
-    </span>
-    <span>
-    <label>Filmes:</label>
-    <input placeholder="00"  type="number" id="filmes" onchange="substituirLink()">
-    <br>
-    </span>
-    <span>
-    <label>Autor:</label>
-    <input type="text" id="autor" onchange="substituirLink()"><br>
-    </span>
-    </div>
-    
-    <label>Tipo:</label>
-    <div class="checkbox-list">
-      <label><input  name="tipo" type="radio"> Dub</label>
-      <label><input  name="tipo" type="radio"> Leg</label>
-    </div><br>
-    
-    <label>Status:</label>
-    <div class="checkbox-list">
-      <label><input name="state" type="radio"> On</label>
-      <label><input name="state" type="radio"> Off</label>
-    </div><br>
-    
- 
-    <div id="htmlGerado"></div>
-    <input id="htmlGeradoText" onchange="substituirLink()">
-         
-    <label>Gêneros:</label>
-    <div class="checkbox-generos">
-  <label><input type="checkbox"> Ação</label>
-  <label><input type="checkbox"> Adulto</label>
-  <label><input type="checkbox"> Artes Marciais</label>
-  <label><input type="checkbox"> Avant Garde</label>
-  <label><input type="checkbox"> Aventura</label>
-  <label><input type="checkbox"> Comédia</label>
-  <label><input type="checkbox"> Comédia Romântica</label>
-  <label><input type="checkbox"> Corrida</label>
-  <label><input type="checkbox"> Crime</label>
-  <label><input type="checkbox"> Cultivo</label>
-  <label><input type="checkbox"> Demônios</label>
-  <label><input type="checkbox"> Detetive</label>
-  <label><input type="checkbox"> Drama</label>
-  <label><input type="checkbox"> Ecchi</label>
-  <label><input type="checkbox"> Espacial</label>
-  <label><input type="checkbox"> Esportes</label>
-  <label><input type="checkbox"> Fantasia</label>
-  <label><input type="checkbox"> Ficção Científica</label>
-  <label><input type="checkbox"> Gastronomia</label>
-  <label><input type="checkbox"> Guerra</label>
-  <label><input type="checkbox"> Harém</label>
-  <label><input type="checkbox"> Hentai</label>
-  <label><input type="checkbox"> Histórico</label>
-  <label><input type="checkbox"> Horror</label>
-  <label><input type="checkbox"> Isekai</label>
-  <label><input type="checkbox"> Jogos</label>
-  <label><input type="checkbox"> Josei</label>
-  <label><input type="checkbox"> Magia</label>
-<label><input type="checkbox"> Mecha</label>
-  <label><input type="checkbox"> Militar</label>
-  <label><input type="checkbox"> Mistério</label>
-  <label><input type="checkbox"> Mitologia</label>
-  <label><input type="checkbox"> Musical</label>
-  <label><input type="checkbox"> Paródia</label>
-  <label><input type="checkbox"> Policial</label>
-  <label><input type="checkbox"> Política</label>
-  <label><input type="checkbox"> Psicológico</label>
-  <label><input type="checkbox"> Reencarnação</label>
-  <label><input type="checkbox"> Romance</label>
-  <label><input type="checkbox"> Samurai</label>
-  <label><input type="checkbox"> Sci-fi</label>
-  <label><input type="checkbox"> Slice of Life</label>
-  <label><input type="checkbox"> Sobrenatural</label>
-  <label><input type="checkbox"> Shonen</label>
-  <label><input type="checkbox"> Shoujo</label>
+  <label>Nome da obra</label>
+  <input id="nome" type="text" oninput="atualizarEpisodios(), atualizarDataId()">
   
-  <label><input type="checkbox"> Sobrenatural</label>
-  <label><input type="checkbox"> Super Poderes</label>
-  <label><input type="checkbox"> Suspense</label>
-  <label><input type="checkbox"> Terror</label>
-  <label><input type="checkbox"> Vampiros</label>
-  <label><input type="checkbox"> Vida Escolar</label>
-  <label><input type="checkbox"> Yaoi</label>
-  <label><input type="checkbox"> Yuri</label>
-</div><br>
-   <span>
+    <label>Sub Titulo Episódio:</label>
+    <input id="title" onchange="substituirLink()" oninput="atualizarDataId()" placeholder="Ex: Eu sou Luffy! - O Homem que vai ser o Rei dos Piratas!" type="text"><br>
+    
+    <label>Episódio</label>
+    <input id="numero" onchange="substituirLink()" oninput="atualizarDataId(), atualizarEpisodios()" placeholder="Ex: 01" type="number"><br>
+    
+    <label>Tipo</label>
+    <input id="tipo" onchange="substituirLink()" oninput="atualizarDataId()" placeholder="Ex: 'Leg' ou 'Dub'" type="text"><br>
+    
+    <label>Data do episódio</label>
+    <input id="data" onchange="substituirLink()" oninput="atualizarDataId()" placeholder="Ex: 03 Janeiro 2024" type="text"><br><br><br>
+    
+<div class="t">Links criados</div>
+    <label>Página do anime</label>
+    <input class="check" id="pageAnime" onchange="substituirLink()" type="text" readonly>
+    
+    
+    <label>Ep. Anterior</label>
+    <input class="check" id="anteriorep" onchange="substituirLink()" type="text" readonly>
+  
+    <label>Ep. Atual</label>
+    <input class="check" id="atualep" type="text" readonly>
+
+    <label>Ep. Próximo</label>
+    <input class="check" id="proximoep" onchange="substituirLink()" type="text" readonly>
+
+
+
+    <label>Id unico do ep:</label>
+    <input class="check" id="dataid" oninput="atualizarDataId()" oninput="atualizarDataId()" type="text" readonly><br>
+    <input class="displaynone" id="admfoto" type="text" onchange="substituirLink()" readonly>
+   
     <label>Upload por:</label>
     <div class="checkbox-adm">
-      <label><input type="radio" name="adm"> YuuNimes</label>
-      <label><input type="radio" name="adm"> mStaille</label>
-      <label><input type="radio" name="adm"> BLOOM</label>
-      <label><input type="radio" name="adm"> Gwinsy</label>
+      <label><input data-id="https://i.ibb.co/rxP1Pqs/IMG-20231230-WA0348.jpg" type="radio" name="adm"> YuuNimes</label>
+      <label><input data-id="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTdu5ajUSrQJ6Gz_vFkHoP7XC7-tXvCboF8w&usqp=CAU" type="radio" name="adm"> mStaille</label>
+      <label><input data-id="https://i.ibb.co/RNsz1Wn/IMG-20231230-WA0684.jpg" type="radio" name="adm"> BLOOM</label>
+      <label><input data-id="https://i.ibb.co/1RWsCKH/IMG-20231230-WA0408.jpg" type="radio" name="adm"> Gwinsy</label>
     </div>
     </span><br>
+
+    
+    
     
     <button class="button" type="button" onclick="generateHTML()">Gerar código</button>
-  </form>
-  <div id="alert">
-  	<h2></h2>
-  </div>
+       </form>
+       <div id="alert">
+         <h2></h2>
+       </div>
+   
+       <div class="code" onclick="removegerou()">
+         <div id="generatedCode" onclick="copyToClipboard('generatedCode')">
+         </div>
+      </div>
+       
+       
+  <script>
+  // img poster 
+var capaImg = document.querySelector(".capa");
+  capaImg.src = poster.value;
   
-  <div class="code" onclick="removegerou()">
-<div id="generatedCode" onclick="copyToClipboard('generatedCode')"></div>
-  	</body>
-  </div>
-
-
-<script>
+var logoCop = document.querySelector(".logoCop");
+var check = document.querySelector(".check");
+  logoCop.src = check.value;
   
-
-
-// ordem alfabetica 
-document.addEventListener("DOMContentLoaded", function() {
-  var checkboxGeneros = document.querySelector('.checkbox-generos');
-  var labels = Array.from(checkboxGeneros.getElementsByTagName('label'));
-
-  // Ordena os labels alfabeticamente com base no texto do label
-  labels.sort(function(a, b) {
-    var textA = a.textContent.trim().toLowerCase();
-    var textB = b.textContent.trim().toLowerCase();
-    return textA.localeCompare(textB);
-  });
-
-  // Limpa os filhos do contêiner
-  checkboxGeneros.innerHTML = '';
-
-  // Adiciona os labels ordenados de volta ao contêiner
-  labels.forEach(function(label) {
-    checkboxGeneros.appendChild(label);
-  });
-});
-
-
-
-// Gerar código 
-function generateHTML() {
-  var codeElement = document.querySelector('.code');
-  var bodyElement = document.body;
-
-  codeElement.classList.add('gerou');
-  bodyElement.classList.add('gerou');
-}
-function removegerou() {
-  var codeElement = document.querySelector('.code');
-  var bodyElement = document.body;
-
-  codeElement.classList.remove('gerou');
-  bodyElement.classList.remove('gerou');
-}
-
-
-
+  
+  
+  // Gerar código 
+  function generateHTML() {
+    var codeElement = document.querySelector('.code');
+    var bodyElement = document.body;
+  
+    codeElement.classList.add('gerou');
+    bodyElement.classList.add('gerou');
+  }
+  
+  function removegerou() {
+    var codeElement = document.querySelector('.code');
+    var bodyElement = document.body;
+  
+    codeElement.classList.remove('gerou');
+    bodyElement.classList.remove('gerou');
+  }
+  
+  
   // copiar 
   function copyToClipboard(elementId) {
     var element = document.getElementById(elementId);
@@ -256,398 +169,296 @@ function removegerou() {
     alert("Texto copiado!");
   }
   
-  
-  
-//generos 
-function adicionarGenero(element) {
-  var checkboxLabel = element.parentElement.textContent.trim();
-  var h3Element = document.createElement('h3');
-  h3Element.textContent = checkboxLabel;
-
-  var divHtmlGerado = document.getElementById('htmlGerado');
-  divHtmlGerado.appendChild(h3Element);
-
-  exibirHTMLGerado();
-    substituirLink();
-}
-
-function removerGenero(element) {
-  var checkboxLabel = element.parentElement.textContent.trim();
-  var h3Elements = document.querySelectorAll('#htmlGerado h3');
-
-  h3Elements.forEach(function(h3) {
-    if (h3.textContent === checkboxLabel) {
-      h3.remove();
-    }
-  });
-
-  exibirHTMLGerado();
-    substituirLink();
-}
-
-function exibirHTMLGerado() {
-  var divHtmlGerado = document.getElementById('htmlGerado');
-  var htmlGerado = divHtmlGerado.innerHTML;
-  document.getElementById('htmlGeradoText').value = htmlGerado;
-}
-
-window.onload = function() {
-  var checkboxes = document.querySelectorAll('.checkbox-generos input[type="checkbox"]');
-
-  checkboxes.forEach(function(checkbox) {
-    checkbox.addEventListener('change', function() {
-      if (checkbox.checked) {
-        adicionarGenero(checkbox);
-      } else {
-        removerGenero(checkbox);
-      }
-    });
-  });
-};
 
 
 
-  
-  // Ano
-var ano = '';
-document.querySelectorAll('.ano').forEach((anoInput) => {
-  anoInput.addEventListener('change', function() {
-
-    substituirLink();
-  });
-});
-
-// subtitle
-var subtitle = '';
-document.querySelectorAll('.subtitle').forEach((subtitleInput) => {
-  subtitleInput.addEventListener('change', function() {
-
-    substituirLink();
-  });
-});
 //ADM
 var upload = '';
-
-        document.addEventListener('DOMContentLoaded', function () {
-            // Recupera o valor do localStorage
-            var storedUpload = localStorage.getItem('selectedUpload');
-            if (storedUpload) {
-                upload = storedUpload;
-
-                // Marca o input correspondente
-                document.querySelectorAll('input[name="adm"]').forEach((radio) => {
-                    if (radio.parentNode.textContent.trim() === upload) {
-                        radio.checked = true;
-                    }
-                });
-            }
-
-            // Adiciona eventos de mudança aos inputs
-            document.querySelectorAll('input[name="adm"]').forEach((radio) => {
-                radio.addEventListener('change', function () {
-                    if (this.checked) {
-                        upload = this.parentNode.textContent.trim();
-
-                        // Armazena o valor no localStorage
-                        localStorage.setItem('selectedUpload', upload);
-                    } else {
-                        upload = '';
-                    }
-
-                    substituirLink();
-                });
-            });
-        });
-
-//Status
-var state = '';
-document.querySelectorAll('input[name="state"]').forEach((radio) => {
-  radio.addEventListener('change', function() {
-    if (this.checked) {
-      state = this.parentNode.textContent.trim();
-    } else {
-      state = '';
-    }
-
-    substituirLink();
-  });
-});
-//Tipo
-var tipo = '';
-document.querySelectorAll('input[name="tipo"]').forEach((radio) => {
-  radio.addEventListener('change', function() {
-    if (this.checked) {
-      tipo = this.parentNode.textContent.trim();
-    } else {
-      tipo = '';
-    }
-
-    substituirLink();
-  });
-});
-//Status
-var estacao = '';
-document.querySelectorAll('input[name="estacao"]').forEach((radio) => {
-  radio.addEventListener('change', function() {
-    if (this.checked) {
-      estacao = this.parentNode.textContent.trim();
-    } else {
-      estacao = '';
-    }
-
-    substituirLink();
-  });
-});
-
-
-
+var admfotoCampo = document.getElementById("admfoto");
 
 document.addEventListener('DOMContentLoaded', function() {
-  var checkboxes = document.querySelectorAll('.checkbox-generos input[type="checkbox"]');
+  // Recupera o valor do localStorage
+  var storedUpload = localStorage.getItem('selectedUpload');
+  if (storedUpload) {
+    upload = storedUpload;
 
-  checkboxes.forEach(function(checkbox) {
-    checkbox.addEventListener('change', function() {
-      adicionarGenero(this);
+    // Marca o input correspondente
+    document.querySelectorAll('input[name="adm"]').forEach((radio) => {
+      if (radio.parentNode.textContent.trim() === upload) {
+        radio.checked = true;
+        admfotoCampo.value = radio.getAttribute("data-id");
+      }
+    });
+  }
+
+  // Adiciona eventos de mudança aos inputs
+  document.querySelectorAll('input[name="adm"]').forEach((radio) => {
+    radio.addEventListener('change', function() {
+      if (this.checked) {
+        upload = this.parentNode.textContent.trim();
+
+        // Atualiza o valor de admfoto
+        admfotoCampo.value = this.getAttribute("data-id");
+
+        // Armazena o valor no localStorage
+        localStorage.setItem('selectedUpload', upload);
+      } else {
+        upload = '';
+        admfotoCampo.value = ''; // Limpa o valor de admfoto
+      }
+
+      substituirLink();
     });
   });
-
-  function adicionarGenero(checkbox) {
-    var genero = checkbox.value;
-
-    if (checkbox.checked) {
-      var genesContainer = document.querySelector('.genes');
-      var novoH3 = document.createElement('h3');
-      novoH3.textContent = genero;
-      genesContainer.appendChild(novoH3);
-    } else {
-      // Se o checkbox for desmarcado, remova o h3 correspondente
-      var h3s = document.querySelectorAll('.genes h3');
-      h3s.forEach(function(h3) {
-        if (h3.textContent === genero) {
-          h3.remove();
-        }
-      });
-    }
-  }
 });
 
 
+// Atualizar links
+function atualizarEpisodios() {
+  var site = document.getElementById('site').value.trim(); // Obtém o valor do #site
+  var nomeObra = document.getElementById('nome').value.trim();
+  var formatoMinisculo = nomeObra.toLowerCase();
+  var comTracos = formatoMinisculo.replace(/ /g, '-');
+
+  var numeroEpisodio = document.getElementById('numero').value;
+  var numeroEpisodioFormatado = numeroEpisodio.toString().padStart(2, '0');
+
+  // Obtém o valor do #site no início
+  var valorSite = site ? site : "";  // Se #site estiver vazio, assume uma string vazia
+
+  var resultadoAnterior = valorSite + comTracos + "-Ep" + (parseInt(numeroEpisodio) - 1).toString().padStart(2, '0');
+  var resultadoAtual = comTracos + "-Ep" + numeroEpisodioFormatado; // Não inclui o valor do #site aqui
+  var resultadoProximo = valorSite + comTracos + "-Ep" + (parseInt(numeroEpisodio) + 1).toString().padStart(2, '0');
+  var resultadoPaginaAnime = valorSite + comTracos + '.html';
+
+  document.getElementById('anteriorep').value = resultadoAnterior;
+  document.getElementById('atualep').value = resultadoAtual;
+  document.getElementById('proximoep').value = resultadoProximo;
+  document.getElementById('pageAnime').value = resultadoPaginaAnime;
+}
 
 
-function substituirLink() {
-  console.log("Link substituído:", upload);
-  
-  
-  ano = document.querySelector('.ano').value;
-  subtitle = document.querySelector('.subtitle').value;
-  
-  var inputCapa = document.getElementById("Capa");
-  var inputCapamobile = document.getElementById("Capamobile");
-  var sinopse = document.getElementById("sinopse");
-  var totaleps = document.getElementById("totaleps");
-  var nota = document.getElementById("nota");
-  var temporadaAtual = document.getElementById("temporadaAtual");
-  var linkAnterior = document.getElementById("linkAnterior");
-  var linkProximo = document.getElementById("linkProximo");
-  var listaeps = document.getElementById("listaeps");
-  var duration = document.getElementById("duration");
-  var ova = document.getElementById("ova");
-  var filmes = document.getElementById("filmes");
-  var estudio = document.getElementById("estudio");
-  var pais = document.getElementById("pais");
-  var autor = document.getElementById("autor");
-  var youtubeLink = document.getElementById("youtubeLink");
-  var htmlGeradoText = document.getElementById("htmlGeradoText");
-  
-  
-  
-  
-  var generatedCode = document.getElementById("generatedCode");
-  
+
+
+
+
+function atualizarDataId() {
+  var dataidCampo = document.getElementById("dataid");
+  var titleCampo = document.getElementById("title");
+  var numeroCampo = document.getElementById("numero");
+  var dataCampo = document.getElementById("data");
+  var siteCampo = document.getElementById("site");
+  var tipoCampo = document.getElementById("tipo");
+  var nomeObraCampo = document.getElementById("nome"); // Adiciona o campo do nome da obra
+
+  // Remover espaços dos valores dos campos
+  var siteValue = siteCampo.value.replace(/\s/g, '');
+  var titleValue = titleCampo.value.replace(/\s/g, '');
+  var numeroValue = numeroCampo.value.replace(/\s/g, '');
+  var dataValue = dataCampo.value.replace(/\s/g, '');
+  var tipoValue = tipoCampo.value.replace(/\s/g, '');
+  var nomeObraValue = nomeObraCampo.value.replace(/\s/g, ''); // Obtém o valor do campo do nome da obra
+
+  // Criar o valor do data-id sem espaços, adicionando o valor do nome da obra
+  var dataidValue = siteValue + nomeObraValue + titleValue + numeroValue + tipoValue + dataValue;
+
+  // Atribuir o valor ao campo data-id
+  dataidCampo.value = dataidValue;
+}
+
+
  
-  
+  function atualizarListep() {
+  var pageList= document.getElementById("pageList");
+  var listep = document.getElementById("listep");
+
+  // Atribuir o valor de pageList a listep
+  listep.value = pageList.value;
+
+  // O restante do seu código...
+  substituirLink();
+}
 
 
-  // Obtém o valor do input
-  /*main2*/
-  var capa = inputCapa.value;
-  var capamobile = inputCapamobile.value;
-  var sinopse = sinopse.value;
-  var totaleps = totaleps.value;
-  /*main1*/
-  var nota = nota.value;
-  var temporadaAtual = temporadaAtual.value;
-  var linkAnterior = linkAnterior.value;
-  var linkProximo = linkProximo.value;
-/*main3*/
-  var listaeps = listaeps.value;
-  var duration = duration.value;
-  var ova = ova.value;
-  var filmes = filmes.value;
-  var estudio = estudio.value;
-  var pais = pais.value;
-  var autor = autor.value;
-  var youtubeLink = youtubeLink.value;
-  var htmlGeradoText = htmlGeradoText.value;
+  function atualizardownload1() {
+  var qualidade1= document.getElementById("qualidade1");
+  var download1 = document.getElementById("download1");
+  download1.value = qualidade1.value;
+  substituirLink();
+}
+  function atualizardownload2() {
+    var qualidade2 = document.getElementById("qualidade2");
+    var download2 = document.getElementById("download2");
+    download2.value = qualidade2.value;
+    substituirLink();
+  }
+    function atualizardownload3() {
+      var qualidade3 = document.getElementById("qualidade3");
+      var download3 = document.getElementById("download3");
+      download3.value = qualidade3.value;
+      substituirLink();
+    }
+
+document.addEventListener('DOMContentLoaded', function() {
+  var logoimgCampo = document.getElementById("logoimg");
+  var mingifImg = document.querySelector(".mingif");
+
+  // Adiciona um ouvinte para atualizar a imagem quando o valor do input mudar
+  logoimgCampo.addEventListener('input', function() {
+    var newSrc = logoimgCampo.value;
+
+    // Atualiza o src da imagem
+    mingifImg.src = newSrc;
+  });
+});
+
+
+  function substituirLink() {
+  var generatedCode = document.getElementById("generatedCode");
+  var poster = document.getElementById("poster");
+  var logo = document.getElementById("logo");
+  var pageAnime = document.getElementById("pageAnime");
+  var pageList = document.getElementById("pageList");
+  var qualidade1 = document.getElementById("qualidade1");
+  var qualidade2 = document.getElementById("qualidade2");
+  var qualidade3 = document.getElementById("qualidade3");
+  var numero = document.getElementById("numero");
+  var title = document.getElementById("title");
+  var data = document.getElementById("data");
+  var anteriorep = document.getElementById("anteriorep");
+  var proximoep = document.getElementById("proximoep");
+  var listep = document.getElementById("listep");
+  var download1 = document.getElementById("download1");
+  var download2 = document.getElementById("download2");
+  var download3 = document.getElementById("download3");
+  var admfoto = document.getElementById("admfoto");
+  var logoimg = document.getElementById("logoimg");
+  var tipo = document.getElementById("tipo")
   
-  var codigoHTML = `
-  <section>
-    <div id="fundopa" style="background-image: url('${capamobile}');">
-    </div>
-    <div class="divcapamore">
-      <span id="capa">
-        <img src="${capa}" />
-      </span>
-    </div>
-    <div class="caixa1">
-      <main class="main2">
-        <div>
-          <h8 id="sinopse">${sinopse}</h8>
-        </div>
-        <ul>
-          <li id="ano" class="ano">${ano}</li>
-          <li id="totalEps">${totaleps}</li>
-          <li id="tipo">${tipo}</li>
-          <li id="status">${state}</li>
-        </ul>
-      </main>
-    <main class="main1">
-      <h8 class="subtitle">${subtitle}</h8>
-      <h2 id="titleAnime"></h2>
+  var tipo = tipo.value;
+  var logoimg = logoimg.value;
+  var admfoto = admfoto.value;
+  var download3 = download3.value;
+  var download2 = download2.value;
+  var download1 = download1.value;
+  var listep = listep.value;
+  var proximoep = proximoep.value;
+  var anteriorep = anteriorep.value;
+  var data = data.value;
+  var title = title.value;
+  var numero = numero.value;
+  var qualidade1 = qualidade1.value;
+  var qualidade2 = qualidade2.value;
+  var qualidade3 = qualidade3.value;
+  var pageList = pageList.value;
+  var pageAnime = pageAnime.value;
+  var logo = logo.value;
+  var poster = poster.value;
+  var codigoHTML =
+  `<section class="geralvideopc">
+     <section class="secvideo video-container custom-video-player">
+  <video id="myVideo"  poster="${poster}">
+      <source id="videoSource" src="" preload="auto">
+  </video>
+  <div class="bannerads">
+    <button id="closeButton" onclick="closeBanner()" disabled><div id="countdownpp">5</div></button>
+    <div id="contbanner"></div>
+  </div>
+  <span class="poster">
+    <img src="${logoimg}"/>
+  </span>
+  <div id="controlsplayer">
+    <span class="superiorpart"> 
+      <span>
+         <img src="${logo}"/>
+       </span>
+         <button class="buttonjmp" id="eplinkpro">Próx. Ep</button>
+         <button class="buttonjmp" id="pularop">Pular 90s</button>
+    </span>
+    <span class="medialpart">
+      <button id="minusseg"></button>
+  <button id="customPlayPauseBtn"></button>
+      <button id="moreseg"></button>
+    </span>
+    <span class="endpart">
+        <div class="timeline">
+  <input class="progressao" type="range" min="0" max="100" value="0" step="0.01">
+          </div>
+          <div class="morebtn">
+      <button id="volumepp">
+        <input class="volu" type="range" min="0" max="100" value="100">
+      </button>
+      <button class="velocidade speed-btn">1x</button>
+      <span class="current-time">00:00</span>
+      <span class="total-time"></span>
+      <button id="qualidade"><h8 id="qAtual"></h8></button>
+  <h3 id="video480p" data-source="${qualidade1}" onclick="changeSource(this)">480p</h3><img>
+  <h3 id="video720p" class="hd" data-source="${qualidade2}" onclick="changeSource(this)">720p</h3>
+  <h3 id="video1080p" data-source="${qualidade3}" onclick="changeSource(this)">1080p</h3>
+      <button id="fullcontrols" class="full-screen-btn"></button>
+      </div>
+    </span>
+  </div>
+  </section>
+      <div class="iframeep">
+        <iframe src="${listep}" frameborder="0" onload="resizeIframe(this)"></iframe>
+      </div>
+    </section>
+  <section class="sectionpage" id="pageplayer">
+    <div id="player"></div>
+    <main>
+    <span class="titlepp">
+      <h4>Episódio ${numero}</h4>
+      <h2>${title}</h2>
       <div>
-        <h2 class="topSs">${nota}</h2>
-        <h4>HD</h4>
-        <main>
-          <h8>${estacao}</h8>
-          <h8><h8 class="nT">${temporadaAtual}</h8> Temporada</h8>
-        </main>
-        <div class="temporada">
-          <span>
-            <h3 class="gen1"></h3>
-            <h3 class="gen2"></h3>
-            <h3 class="gen3"></h3>
-            <button id="nextT"></button>
-          </span>
-          <span class="buttonTemp">
-            <a data-text="Anterior" href="${linkAnterior}"></a>
-            <a data-text="Próxima Temporada" href="${linkProximo}"></a>
-          </span>
-        </div>
-       </div>
+        <h5>HD</h5>
+        <h5>${tipo}</h5>
+        <h5>${data}</h5>
+      </div>
+    </span>
+    <div class="geralpc">
+    <span data-id="${dataid.value}" class="likepp">
+        <button data-id="like" onclick="toggleActive(this)"></button>
+        <button data-id="dislike" onclick="toggleActive(this)"></button>
+    <div class="nextprevpp">
+      <a href="${anteriorep}"></a>
+      <a href="${pageAnime}"></a>
+      <a class="proxeplink" href="${proximoep}"></a>
+    </div>
+  </span>
+  <div class="infos">
+    <img src="${admfoto}"/>
+    <span>
+        <h1>${upload}</h1>
+        <h4>Administrador</h4>
+    </span>
+  </div>
+  <h2 class="download" onclick="toggledowbpp(this)">Download</h2>
+   </div>
+     <div id="downloadpp">
+       <a href="${download1}" class="statusText"download>480p</a>
+       <a href="${download2}" class="statusText">720p</a>
+       <a href="${download3}" class="statusText">1080p</a>
+     </div>
     </main>
+      <div id="iframeep">
+        <iframe src="${pageList}" frameborder="0"onload="resizeIframe(this)"></iframe>
+      </div>
+    <div class="error">
+      <h1>Atenção!</h1>
+      <h4>Em caso de algum erro, atualize a página </h4>
     </div>
   </section>
-      <main class="main3">
-        <ul>
-          <li class="attsection" onclick="atsection(this,'episodios')">Assistir</li>
-          <li onclick="atsection(this,'ficha')">Ficha Técnica</li>
-          <li onclick="atsection(this,'cast')">Cast</li>
-        </ul>
-      </main>
-  
-      <section id="episodios" class="content attsection">
-        <iframe src="${listaeps}" frameborder="0" class="resizeable-iframe"></iframe>
-  
-      </section>
-      <section id="ficha" class="content">
-        <ul>
-          <li>
-            <p>Título Alternativo</p>
-            <span>
-              <h3 class="subtitle">${subtitle}</h3>
-            </span>
-          </li>
-          <li>
-            <p>Gêneros</p>
-            <span class="genes">
-            ${htmlGeradoText}</span>
-          </li>
-          <li>
-            <p>Duração média</p>
-            <span>
-              <h3>${duration}</h3>
-            </span>
-          </li>
-          <li>
-            <p>OVAs</p>
-            <span>
-              <h3>${ova}</h3>
-            </span>
-          </li>
-          <li>
-            <p>Filmes</p>
-            <span>
-              <h3>${filmes}</h3>
-            </span>
-          </li>
-          <li>
-            <p>Estúdio </p>
-            <span>
-              <h3>${estudio}</h3>
-            </span>
-          </li>
-          <li>
-            <p>Ano de Estreia</p>
-            <span>
-              <h3 class="ano">${ano}</h3>
-            </span>
-          </li>
-          <li>
-            <p>País</p>
-            <span>
-              <h3>${pais}</h3>
-            </span>
-          </li>
-          <li>
-            <p>Autor</p>
-            <span>
-              <h3>${autor}</h3>
-            </span>
-          </li>
-          <li>
-            <p>Upload por</p>
-            <span>
-            <h3>${upload}</h3>
-            </span>
-          </li>
-<div class="youtubeContainer" data-link-embed="${youtubeLink}"></div>
-        </ul>
-      </section>
-      <section id="cast" class="content">
-        <ul>
-        </ul>
-      </section>
-  
- 
-  
-  `;
+   <style>.post .pInf{display:none;}</style>
+    `;
 
-var capaInput = document.getElementById('Capa');
-var imagem = document.querySelector('.lab1 img');
-imagem.src = capaInput.value;
   generatedCode.textContent = codigoHTML;
 
 }
 
+  
 
+  </script>
 
-function gerarEmbed() {
-  var inputLink = document.getElementById('youtubeLink').value;
-  var videoId = extrairID(inputLink);
-  var embedLink = "https://www.youtube.com/embed/" + videoId;
-
-  // Atualiza a div com a iframe do vídeo
-  var resultadoIframeDiv = document.getElementById('resultadoIframe');
-  resultadoIframeDiv.innerHTML = `
-      <iframe width="560" height="315" src="${embedLink}" frameborder="0" allowfullscreen></iframe>
-    `;
-}
-
-function extrairID(link) {
-  // Extrai o ID do vídeo do link do YouTube
-  var match = link.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
-  return match ? match[1] : '';
-}
-</script>
 </body>
 </html>
