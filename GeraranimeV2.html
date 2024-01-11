@@ -302,11 +302,11 @@ function atualizarLink() {
 
   // Cria o valor para #anteriorseason
   var seasonNumber = parseInt(seasonValue, 10);
-  var anteriorSeasonValue = (seasonNumber > 1) ? `Ep${String(seasonNumber - 1).padStart(2, '0')}` : '';
+  var anteriorSeasonValue = (seasonNumber > 1) ? String(seasonNumber - 1) : '';
   document.getElementById('anteriorseason').value = (seasonNumber > 1) ? `${siteValue}${tituloValue}-${anteriorSeasonValue}` : '';
 
   // Cria o valor para #proximaseason
-  var proximaSeasonValue = `Ep${String(seasonNumber + 1).padStart(2, '0')}`;
+  var proximaSeasonValue = String(seasonNumber + 1);
   document.getElementById('proximaseason').value = `${siteValue}${tituloValue}-${proximaSeasonValue}`;
 }
 
