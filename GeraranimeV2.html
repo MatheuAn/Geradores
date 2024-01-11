@@ -119,6 +119,7 @@ button:hover {
   </style>
 
 <!-- Pergunta 1 -->
+<div class="geradorV2">
 <label for="pergunta1">link do site</label>
 <input type="text" value="https://www.yuunimes.top/" id="site" oninput="atualizarLink()">
 
@@ -238,7 +239,7 @@ button:hover {
 <!-- Pergunta 11 -->
 <label for="temporada">Season:</label>
 <input type="number" id="season" oninput="atualizarLink()">
-
+</div>
 <!-- Área de Texto -->
 <label for="respostas">Área de Texto:</label>
 <textarea id="respostas"></textarea>
@@ -255,6 +256,10 @@ button:hover {
 
 
 <script>
+// Obtém todos os inputs dentro da classe .geradorV2
+
+
+
 function copyToClipboard(elementId) {
   // Seleciona o conteúdo da textarea
   var textarea = document.getElementById(elementId);
@@ -290,7 +295,8 @@ function atualizarLink() {
   var siteValue = document.getElementById('site').value;
   var tituloValue = document.getElementById('titulo').value;
   var seasonValue = document.getElementById('season').value;
-
+  
+  
   // Transforma o título para minúsculas e substitui espaços por "-"
   tituloValue = tituloValue.toLowerCase().replace(/\s+/g, '-');
 
@@ -346,7 +352,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function gerarCodigo() {
-  
+  var inputs = document.querySelectorAll('.geradorV2 input');
+
+  // Itera sobre cada input e remove os espaços dos valores
+  inputs.forEach(function(input) {
+    input.value = input.value.replace(/(?<!\S)\s+/g, '');
+  });
+
+
   // Obter os elementos de input
   var pergunta1 = document.getElementById('pergunta1').value;
   var pergunta2 = document.getElementById('pergunta2').value;
