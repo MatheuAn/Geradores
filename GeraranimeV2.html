@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Páginas blogger/geradores/gerardorV2.css"/>
+    <title>Gerador de Perguntas</title>
+</head>
+<body>
+  <style>
+  textarea{
+    outline: none;
+  }
+  .codegerado{
+    position:fixed;
+    top:0%;
+    left:0%;
+    height:100%;
+    width:100%;
+    padding:50px;
+    box-sizing:border-box;
+    z-index:2;
+    background:#000018;
+    display:none;
+  }
+  .codegerado button{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: transparent;
+    z-index:-1;
+  }
+    #codigoGerado{
+      height:100%;
+      width:100%;
+      background:#42445A;
+      color: white;
+      text-align: pre;
+    }
+    
+    #mensagemCopiado{
+      position:fixed;
+      top:45%;
+      left:auto;
+      height:auto;
+      width:60%;
+      opacity:1;
+      z-index:2;
+      display:none;
+      background:red;
+    }
+    
+    .gerou{
+      display:flex;
+    }
+  </style>
+
+<!-- Pergunta 1 -->
+<label for="pergunta1">link do site</label>
+<input type="text" value="https://www.yuunimes.top/" id="site" oninput="atualizarLink()">
+
+<label for="pergunta1">Imagem 1:</label>
+<input type="text" id="pergunta1">
+
+<!-- Pergunta 2 -->
+<label for="pergunta2">Imagem 2:</label>
+<input type="text" id="pergunta2">
+
+<!-- Pergunta 3 -->
+<label for="pergunta3">Link do Trailer:</label>
+<input type="text" id="pergunta3">
+
+<!-- Pergunta 4 -->
+<label for="titulo">Título:</label>
+<input type="text" id="titulo" oninput="atualizarLink()">
+
+<!-- Pergunta 5 -->
+<label for="subtitulo">Subtítulo:</label>
+<input type="text" id="subtitulo">
+
+<!-- Pergunta 6 -->
+<label for="tituloAlternativo">Título Alternativo:</label>
+<input type="text" id="tituloAlternativo">
+
+<!-- Pergunta 7 -->
+<label for="generos">Gêneros:</label>
+<input type="text" id="generos">
+
+<!-- Pergunta 8 -->
+<label for="sinopse">Sinopse:</label>
+<textarea id="sinopse"></textarea>
+
+<!-- Pergunta 9 -->
+<label for="estreia">Data de Estreia:</label>
+<input type="text" id="estreia">
+
+<!-- Pergunta 10 -->
+<label for="nota">Nota:</label>
+<input type="text" id="nota">
+
+<!-- Pergunta 11 -->
+<label for="temporada">Temporada:</label>
+<input type="text" id="temporada">
+
+<!-- Pergunta 12 -->
+<label for="episodios">N° de Episódios:</label>
+<input type="text" id="episodios">
+
+<!-- Pergunta 13 -->
+<label for="anoLancamento">Ano de Lançamento:</label>
+<input type="text" id="anoLancamento">
+
+<!-- Pergunta 14 -->
+<label for="tipo">Tipo:</label>
+<input type="text" id="tipo">
+
+<label for="categoria">Categoria:</label>
+<input type="text" id="categoria">
+
+<!-- Pergunta 15 -->
+<label for="status">Status:</label>
+<input type="text" id="status">
+
+<!-- Pergunta 16 -->
+<label for="duracaoMedia">Duração Média:</label>
+<input type="text" id="duracaoMedia">
+
+<!-- Pergunta 17 -->
+<label for="filmes">Filmes:</label>
+<input type="text" id="filmes">
+
+<!-- Pergunta 18 -->
+<label for="ovas">Ovas:</label>
+<input type="text" id="ovas">
+
+<!-- Pergunta 19 -->
+<label for="pais">País:</label>
+<input type="text" id="pais">
+
+<!-- Pergunta 20 -->
+<label for="estudio">Estúdio:</label>
+<input type="text" id="estudio">
+
+<!-- Pergunta 21 -->
+<label for="autor">Autor:</label>
+<input type="text" id="autor">
+<!-- Pergunta 21 -->
+<label for="autor">Link da lista de eps:</label>
+<input type="text" id="listep">
+<!-- Pergunta 21 -->
+<label for="autor">Season anterior link:</label>
+<input type="text" id="anteriorseason">
+<!-- Pergunta 21 -->
+<label for="autor">Season Atual link:</label>
+<input type="text" id="seasonatual">
+<!-- Pergunta 21 -->
+<label for="autor">Season Próximo link:</label>
+<input type="text" id="proximaseason" oninput="atualizarLink()">
+<!-- Pergunta 21 -->
+<label for="autor">Upload:</label>
+<input type="text" id="uploadby">
+
+   <span>
+     <label>Upload por:</label>
+     <div class="checkbox-adm">
+       <label><input type="radio" name="adm"> YuuNimes</label>
+       <label><input type="radio" name="adm"> mStaille</label>
+       <label><input type="radio" name="adm"> BLOOM</label>
+       <label><input type="radio" name="adm"> Gwinsy</label>
+     </div>
+   </span><br>
+   
+   
+
+<!-- Pergunta 11 -->
+<label for="temporada">Season:</label>
+<input type="number" id="season" oninput="atualizarLink()">
+
+<!-- Área de Texto -->
+<label for="respostas">Área de Texto:</label>
+<textarea id="respostas"></textarea>
+
+
+<!-- Campo para exibir o código gerado -->
+<button onclick="gerarCodigo()">Gerar Código</button>
+
+<div class="codegerado">
+<textarea id="codigoGerado" onclick="copyToClipboard('codigoGerado')" readonly></textarea>
+<button onclick="fecharcode()"></button>
+<div id="mensagemCopiado">Conteúdo copiado!</div>
+</div>
+
+
+<script>
+function copyToClipboard(elementId) {
+  // Seleciona o conteúdo da textarea
+  var textarea = document.getElementById(elementId);
+  textarea.select();
+  
+  // Copia o conteúdo para a área de transferência
+  document.execCommand('copy');
+  
+  // Deseleciona o texto
+  textarea.setSelectionRange(0, 0);
+
+  // Exibe a mensagem de conteúdo copiado
+  var mensagemCopiado = document.getElementById('mensagemCopiado');
+  mensagemCopiado.style.display = 'block';
+
+  // Oculta a mensagem após alguns segundos
+  setTimeout(function() {
+    mensagemCopiado.style.display = 'none';
+  }, 2000); // 2000 milissegundos = 2 segundos
+}
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  atualizarLink(); // Chama a função ao carregar a página
+});
+
+function atualizarLink() {
+  var siteValue = document.getElementById('site').value;
+  var tituloValue = document.getElementById('titulo').value;
+  var seasonValue = document.getElementById('season').value;
+
+  // Transforma o título para minúsculas e substitui espaços por "-"
+  tituloValue = tituloValue.toLowerCase().replace(/\s+/g, '-');
+
+  // Remove "-" do início ou final
+  tituloValue = tituloValue.replace(/^-+|-+$/g, '');
+
+  // Cria o valor para #seasonatual
+  document.getElementById('seasonatual').value = `${siteValue}${tituloValue}`;
+
+  // Cria o valor para #anteriorseason
+  var seasonNumber = parseInt(seasonValue, 10);
+  var anteriorSeasonValue = (seasonNumber > 1) ? `Ep${String(seasonNumber - 1).padStart(2, '0')}` : '';
+  document.getElementById('anteriorseason').value = (seasonNumber > 1) ? `${siteValue}${tituloValue}-${anteriorSeasonValue}` : '';
+
+  // Cria o valor para #proximaseason
+  var proximaSeasonValue = `Ep${String(seasonNumber + 1).padStart(2, '0')}`;
+  document.getElementById('proximaseason').value = `${siteValue}${tituloValue}-${proximaSeasonValue}`;
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  var radioButtons = document.querySelectorAll('input[name="adm"]');
+  var uploadByInput = document.getElementById('uploadby');
+
+  // Carregar valor salvo no localStorage para o rádio selecionado, se existir
+  var savedRadioValue = localStorage.getItem('selectedRadio');
+  if (savedRadioValue) {
+    // Procurar o rádio correspondente e marcá-lo
+    radioButtons.forEach(function(radio) {
+      if (radio.nextSibling.nodeValue.trim() === savedRadioValue) {
+        radio.checked = true;
+        uploadByInput.value = savedRadioValue;
+      }
+    });
+  }
+
+  radioButtons.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      if (this.checked) {
+        var selectedValue = this.nextSibling.nodeValue.trim();
+        uploadByInput.value = selectedValue;
+
+        // Salvar no localStorage
+        localStorage.setItem('selectedRadio', selectedValue);
+      }
+    });
+  });
+});
+
+
+
+
+
+
+function gerarCodigo() {
+  
+  // Obter os elementos de input
+  var pergunta1 = document.getElementById('pergunta1').value;
+  var pergunta2 = document.getElementById('pergunta2').value;
+  var pergunta3 = document.getElementById('pergunta3').value;
+  
+  var subtitulo = document.getElementById('subtitulo').value;
+  var generos = document.getElementById('generos').value;
+  var generosArray = generos.split(',').map(genero => genero.trim());
+
+  var estreia = document.getElementById('estreia').value;
+  var sinopse = document.getElementById('sinopse').value;
+  var nota = document.getElementById('nota').value;
+  var temporada = document.getElementById('temporada').value;
+  var anoLancamento = document.getElementById('anoLancamento').value;
+  var episodios = document.getElementById('episodios').value;
+  var tipo = document.getElementById('tipo').value;
+  var status = document.getElementById('status').value;
+  var ovas = document.getElementById('ovas').value;
+  var filmes = document.getElementById('filmes').value;
+  var duracaoMedia = document.getElementById('duracaoMedia').value;
+  var pais = document.getElementById('pais').value;
+  var estudio = document.getElementById('estudio').value;
+  var autor = document.getElementById('autor').value;
+  var categoria = document.getElementById('categoria').value;
+  var listep = document.getElementById('listep').value;
+  var anteriorseason = document.getElementById('anteriorseason').value;
+  var proximaseason = document.getElementById('proximaseason').value;
+  var uploadby = document.getElementById('uploadby').value;
+  var season = document.getElementById('season').value;
+  var tituloAlternativo = document.getElementById('tituloAlternativo').value;
+
+  // Construir a string HTML
+  var htmlGerado = `
+    <section>
+    <div id="fundopa" class="imgP"  style="background-image: url('${pergunta2}');">
+    </div>
+    <div class="divcapamore">
+      <span id="capa">
+        <img src="${pergunta1}" />
+      </span>
+    </div>
+    <div class="caixa1">
+      <main class="main2">
+        <div id="sinopse">
+          <h8>${sinopse}</h8>
+        </div>
+        <ul>
+          <li id="ano" class="ano">${anoLancamento}</li>
+          <li id="totalEps">${episodios}</li>
+          <li id="tipo">${tipo.replace(/\s/g, '').substring(0, 3)}</li>
+          <li id="status">${status}</li>
+        </ul>
+      </main>
+    <main class="main1">
+      <h8 class="subtitle">${subtitulo}</h8>
+      <h2 id="tititpm"></h2>
+      <div>
+        <h2 class="topSs">${nota}</h2>
+        <h4>HD</h4>
+        <main>
+          <h8>${temporada}</h8>
+          <h8><h8 class="nT">${season}</h8> Temporada</h8>
+        </main>
+        <div class="temporada">
+          <span>
+            <h3 class="gen1"></h3>
+            <h3 class="gen2"></h3>
+            <h3 class="gen3"></h3>
+            <button id="nextT"></button>
+          </span>
+          <span class="buttonTemp">
+            <a data-text="Anterior" href="${anteriorseason}"></a>
+            <a data-text="Próxima Temporada" href="${proximaseason}"></a>
+          </span>
+        </div>
+       </div>
+    </main>
+    </div>
+  </section>
+      <main class="main3">
+        <ul>
+          <li class="attsection" onclick="atsection(this,'episodios')">Assistir</li>
+          <li onclick="atsection(this,'ficha')">Ficha Técnica</li>
+          <li onclick="atsection(this,'cast')">Cast</li>
+        </ul>
+      </main>
+      <section id="episodios" class="content attsection">
+        <iframe src="${listep}" frameborder="0" class="resizeable-iframe"></iframe>
+      </section>
+      <section id="ficha" class="content">
+        <ul>
+          <li>
+            <p>Título Alternativo</p>
+            <span>
+              <h3 class="subtitle">${tituloAlternativo}</h3>
+            </span>
+          </li>
+          <li>
+            <p>Gêneros</p>
+            <span class="genes">${generosArray.map(genero => `<h3>${genero}</h3>`).join('')}</span>
+          </li>
+          <li>
+            <p>Duração média</p>
+            <span>
+              <h3>${duracaoMedia} minutos</h3>
+            </span>
+          </li>
+          <li>
+            <p>OVAs</p>
+            <span>
+              <h3>${ovas}</h3>
+            </span>
+          </li>
+          <li>
+            <p>Filmes</p>
+            <span>
+              <h3>${filmes}</h3>
+            </span>
+          </li>
+          <li>
+            <p>Estúdio </p>
+            <span>
+              <h3>${estudio}</h3>
+            </span>
+          </li>
+          <li>
+            <p>Tipo </p>
+            <span>
+              <h3>${categoria}</h3>
+            </span>
+          </li>
+          <li>
+            <p>Ano de Estreia</p>
+            <span>
+              <h3 class="ano">${estreia}</h3>
+            </span>
+          </li>
+          <li>
+            <p>País</p>
+            <span>
+              <h3>${pais} </h3>
+            </span>
+          </li>
+          <li>
+            <p>Autor</p>
+            <span>
+              <h3>${autor}</h3>
+            </span>
+          </li>
+          <li>
+            <p>Upload por</p>
+            <span>
+            <h3>${uploadby}</h3>
+            </span>
+          </li>
+          <div class="youtubeContainer" data-link-embed="${pergunta3}"></div>
+        </ul>
+      </section>
+      <section id="cast" class="content">
+        <ul>
+        </ul>
+      </section>
+        `;
+
+  // Exibir o código no campo de texto
+  document.getElementById('codigoGerado').innerHTML = htmlGerado;
+  
+document.querySelector('.codegerado').classList.add('gerou');
+}
+
+function fecharcode() {
+  // Remove a classe .gerou do elemento
+  document.querySelector('.codegerado').classList.remove('gerou');
+}
+
+
+
+    document.getElementById('respostas').addEventListener('input', function() {
+        // Captura o valor do texto na área de texto
+        var texto = this.value;
+
+        // Procura padrões nas respostas e preenche os inputs correspondentes
+        if (texto.includes('Imagem 1:')) {
+            document.getElementById('pergunta1').value = removerAsteriscos(obterValor(texto, 'Imagem 1:'));
+        }
+        if (texto.includes('Imagem 2:')) {
+            document.getElementById('pergunta2').value = removerAsteriscos(obterValor(texto, 'Imagem 2:'));
+        }
+        if (texto.includes('Link do Trailer:')) {
+            document.getElementById('pergunta3').value = removerAsteriscos(obterValor(texto, 'Link do Trailer:'));
+        }
+        if (texto.includes('Título:')) {
+            document.getElementById('titulo').value = removerAsteriscos(obterValor(texto, 'Título:'));
+        }
+        if (texto.includes('Subtítulo:')) {
+            document.getElementById('subtitulo').value = removerAsteriscos(obterValor(texto, 'Subtítulo:'));
+        }
+        if (texto.includes('Título Alternativo:')) {
+            document.getElementById('tituloAlternativo').value = removerAsteriscos(obterValor(texto, 'Título Alternativo:'));
+        }
+        if (texto.includes('Gêneros:')) {
+            document.getElementById('generos').value = removerAsteriscos(obterValor(texto, 'Gêneros:'));
+        }
+        if (texto.includes('Categoria:')) {
+            document.getElementById('categoria').value = removerAsteriscos(obterValor(texto, 'Categoria:'));
+        }
+        if (texto.includes('Sinopse:')) {
+            document.getElementById('sinopse').value = removerAsteriscos(obterValor(texto, 'Sinopse:'));
+        }
+        if (texto.includes('Data de Estreia:')) {
+            document.getElementById('estreia').value = removerAsteriscos(obterValor(texto, 'Data de Estreia:'));
+        }
+        if (texto.includes('Nota:')) {
+            document.getElementById('nota').value = removerAsteriscos(obterValor(texto, 'Nota:'));
+        }
+        if (texto.includes('Temporada:')) {
+            document.getElementById('temporada').value = removerAsteriscos(obterValor(texto, 'Temporada:'));
+        }
+        if (texto.includes('N° de Episódios:')) {
+            document.getElementById('episodios').value = removerAsteriscos(obterValor(texto, 'N° de Episódios:'));
+        }
+        if (texto.includes('Ano de Lançamento:')) {
+            document.getElementById('anoLancamento').value = removerAsteriscos(obterValor(texto, 'Ano de Lançamento:'));
+        }
+        if (texto.includes('Tipo:')) {
+            document.getElementById('tipo').value = removerAsteriscos(obterValor(texto, 'Tipo:'));
+        }
+        if (texto.includes('Status:')) {
+            document.getElementById('status').value = removerAsteriscos(obterValor(texto, 'Status:'));
+        }
+        if (texto.includes('Duração Média:')) {
+            document.getElementById('duracaoMedia').value = removerAsteriscos(obterValor(texto, 'Duração Média:'));
+        }
+        if (texto.includes('Filmes:')) {
+            document.getElementById('filmes').value = removerAsteriscos(obterValor(texto, 'Filmes:'));
+        }
+        if (texto.includes('Ovas:')) {
+            document.getElementById('ovas').value = removerAsteriscos(obterValor(texto, 'Ovas:'));
+        }
+        if (texto.includes('País:')) {
+            document.getElementById('pais').value = removerAsteriscos(obterValor(texto, 'País:'));
+        }
+        if (texto.includes('Estúdio:')) {
+            document.getElementById('estudio').value = removerAsteriscos(obterValor(texto, 'Estúdio:'));
+        }
+        if (texto.includes('Autor:')) {
+            document.getElementById('autor').value = removerAsteriscos(obterValor(texto, 'Autor:'));
+        }
+        atualizarLink();
+        
+    });
+
+
+
+
+
+
+
+
+
+
+
+    
+    function obterValor(texto, chave) {
+        var startIndex = texto.indexOf(chave) + chave.length;
+        var endIndex = texto.indexOf('\n', startIndex);
+        return texto.substring(startIndex, endIndex).trim();
+    }
+
+    function removerAsteriscos(valor) {
+        return valor.replace(/\*/g, '');
+    }
+
+
+
+</script>
+
+</body>
+</html>
