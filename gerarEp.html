@@ -72,8 +72,11 @@
   <label>Nome da obra</label>
   <input id="nome" type="text" oninput="atualizarEpisodios(), atualizarDataId()">
   
-    <label>Sub Titulo Episódio:</label>
-    <input id="title" onchange="substituirLink()" oninput="atualizarDataId()" placeholder="Ex: Eu sou Luffy! - O Homem que vai ser o Rei dos Piratas!" type="text"><br>
+  <label>Ano de lançamento</label>
+  <input id="dateobra" type="text" oninput="atualizarEpisodios(), atualizarDataId()">
+  
+    <label>Temporada/ Arco:</label>
+    <input id="title" onchange="substituirLink()" oninput="atualizarDataId()" placeholder="Ex: Temporada 01/ Arco de Egghead" type="text"><br>
     
     <label>Episódio</label>
     <input id="numero" onchange="substituirLink()" oninput="atualizarDataId(), atualizarEpisodios()" placeholder="Ex: 01" type="number"><br>
@@ -82,7 +85,7 @@
     <input id="tipo" onchange="substituirLink()" oninput="atualizarDataId()" placeholder="Ex: 'Leg' ou 'Dub'" type="text"><br>
     
     <label>Data do episódio</label>
-    <input id="data" onchange="substituirLink()" oninput="atualizarDataId()" placeholder="Ex: 03 Janeiro 2024" type="text"><br><br><br>
+    <input id="data" onchange="substituirLink()" oninput="atualizarDataId(),atualizarEpisodios()" placeholder="Ex: 03 Janeiro 2024" type="text"><br><br><br>
     
 <div class="t">Links criados</div>
     <label>Página do anime</label>
@@ -214,8 +217,83 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Atualizar links
+function converterDataFormatada(dataOriginal) {
+  // Mapeia nomes dos meses para seus respectivos números
+  var meses = {
+    'janeiro': '01',
+    'fevereiro': '02',
+    'março': '03',
+    'abril': '04',
+    'maio': '05',
+    'junho': '06',
+    'julho': '07',
+    'agosto': '08',
+    'setembro': '09',
+    'outubro': '10',
+    'novembro': '11',
+    'dezembro': '12'
+  };
+
+  // Divide a data original em partes
+  var partesData = dataOriginal.split(' ');
+
+  // Obtém o ano, mês e dia
+  var ano = partesData[4];
+  var mes = meses[partesData[2].toLowerCase()];
+  var dia = partesData[0];
+
+  // Formata a data no estilo "AAAA/MM/"
+  var dataFormatada = ano + '/' + mes + '/';
+
+  return dataFormatada;
+}
+
+
+function converterDataObraOrigem(dataObraOrigem) {
+  var partesData = dataObraOrigem.split(' de ');
+
+  var mes = partesData[0].toLowerCase();
+  var ano = partesData[1];
+
+  // Mapeia nomes dos meses para seus respectivos números
+  var meses = {
+    'janeiro': '01',
+    'fevereiro': '02',
+    'março': '03',
+    'abril': '04',
+    'maio': '05',
+    'junho': '06',
+    'julho': '07',
+    'agosto': '08',
+    'setembro': '09',
+    'outubro': '10',
+    'novembro': '11',
+    'dezembro': '12'
+  };
+
+  // Obtém o número do mês
+  var numeroMes = meses[mes];
+
+  // Formata a data no estilo "AAAA/MM/"
+  var dataFormatada = ano + '/' + numeroMes + '/';
+
+  return dataFormatada;
+}
+
+function adicionarDiasData(data, dias) {
+  var dataAtual = new Date(data);
+  dataAtual.setDate(dataAtual.getDate() + dias);
+
+  var ano = dataAtual.getFullYear();
+  var mes = (dataAtual.getMonth() + 1).toString().padStart(2, '0');
+  var dia = dataAtual.getDate().toString().padStart(2, '0');
+
+  return ano + '/' + mes + '/' + dia;
+}
+
+
 function atualizarEpisodios() {
-  var site = document.getElementById('site').value.trim(); // Obtém o valor do #site
+  var site = document.getElementById('site').value.trim();
   var nomeObra = document.getElementById('nome').value.trim();
   var formatoMinisculo = nomeObra.toLowerCase();
   var comTracos = formatoMinisculo.replace(/ /g, '-');
@@ -223,20 +301,24 @@ function atualizarEpisodios() {
   var numeroEpisodio = document.getElementById('numero').value;
   var numeroEpisodioFormatado = numeroEpisodio.toString().padStart(2, '0');
 
-  // Obtém o valor do #site no início
-  var valorSite = site ? site : "";  // Se #site estiver vazio, assume uma string vazia
+  var dataEpisodio = document.getElementById('data').value.trim();
+  var dataFormatada = converterDataFormatada(dataEpisodio);
 
-  var resultadoAnterior = valorSite + comTracos + "-Ep" + (parseInt(numeroEpisodio) - 1).toString().padStart(2, '0');
-  var resultadoAtual = comTracos + "-Ep" + numeroEpisodioFormatado; // Não inclui o valor do #site aqui
-  var resultadoProximo = valorSite + comTracos + "-Ep" + (parseInt(numeroEpisodio) + 1).toString().padStart(2, '0');
-  var resultadoPaginaAnime = valorSite + comTracos + '.html';
+  var valorSite = site ? site : "";
+
+  var resultadoAnterior = valorSite + dataFormatada + comTracos + "-Ep" + (parseInt(numeroEpisodio) - 1).toString().padStart(2, '0') + '.html';
+  
+  var resultadoAtual = comTracos + "-Ep" + numeroEpisodioFormatado;
+
+  var resultadoProximo = valorSite + dataFormatada + comTracos + "-Ep" + (parseInt(numeroEpisodio) + 1).toString().padStart(2, '0') + '.html';
+  
+  var resultadoPaginaAnime = valorSite + converterDataObraOrigem(document.getElementById('dateobra').value.trim()) + comTracos + '.html';
 
   document.getElementById('anteriorep').value = resultadoAnterior;
   document.getElementById('atualep').value = resultadoAtual;
   document.getElementById('proximoep').value = resultadoProximo;
   document.getElementById('pageAnime').value = resultadoPaginaAnime;
 }
-
 
 
 
@@ -333,8 +415,10 @@ document.addEventListener('DOMContentLoaded', function() {
   var download3 = document.getElementById("download3");
   var admfoto = document.getElementById("admfoto");
   var logoimg = document.getElementById("logoimg");
+  var nome = document.getElementById("nome");
   var tipo = document.getElementById("tipo")
   
+  var nome = nome.value;
   var tipo = tipo.value;
   var logoimg = logoimg.value;
   var admfoto = admfoto.value;
@@ -409,9 +493,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <main>
     <span class="titlepp">
       <h4>Episódio ${numero}</h4>
-      <h2>${title}</h2>
+      <h2>${nome} - ${title}</h2>
       <div>
-        <h5>FULLHD</h5>
+        <h5>HD</h5>
         <h5>${tipo}</h5>
         <h5>${data}</h5>
       </div>
